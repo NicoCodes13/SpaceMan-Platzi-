@@ -40,10 +40,10 @@ TextureImporter:
     21300070: rock-2
     21300072: rock-3
     21300074: Background
-    21300076: platform-1
-    21300078: platform-3
+    21300076: platform-m
+    21300078: platform-l
     21300080: ground
-    21300082: platform-3
+    21300082: platform-l
     21300084: dot-1
     21300086: dead-1
     21300088: dead-2
@@ -87,6 +87,7 @@ TextureImporter:
     21300164: rock.3
     21300166: background
     21300168: platform-2
+    21300170: platform-s
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -951,7 +952,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: platform-1
+      name: platform-m
       rect:
         serializedVersion: 2
         x: 91
@@ -971,7 +972,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: platform-2
+      name: platform-s
       rect:
         serializedVersion: 2
         x: 707
@@ -1011,11 +1012,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: platform-3
+      name: platform-l
       rect:
         serializedVersion: 2
-        x: 92
-        y: 83
+        x: 95
+        y: 89
         width: 1312
         height: 134
       alignment: 0
