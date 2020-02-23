@@ -285,6 +285,7 @@ MonoBehaviour:
   groundmask:
     serializedVersion: 2
     m_Bits: 256
+  distance: 1.4362
 --- !u!50 &1419742665
 Rigidbody2D:
   serializedVersion: 4

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundmask;
 
+    public float distance = 1.4f;
+
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -29,6 +31,10 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+
+        //* Creando un Gizmo
+        Debug.DrawRay(this.transform.position, Vector2.down * distance , Color.green);
     }
 
     //* Realiza el salto
@@ -47,7 +53,7 @@ public class PlayerController : MonoBehaviour
         //* inicio las fisicas para trazar el rayo invisible
         if (Physics2D.Raycast(this.transform.position, //* desde donde sale el rayo en este caso el personaje
             Vector2.down, //* hacia donde sale el rayo
-            1.5f, //* distancia maxima
+            distance, //* distancia maxima
             groundmask)) //* contra la mascara del suelo
         {
             //TODO: programar logica de contacto con el suelo
