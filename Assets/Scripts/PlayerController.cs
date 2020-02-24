@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundmask;
 
-    public static PlayerController sharedPlayer;
+    public static PlayerController sharedInstance;
 
     public float distance = 1.4f;
 
     void Awake()
     {
-        sharedPlayer = this;
+        sharedInstance = this;
         playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        //* el getbuttonDown me permite accceder es atravez del nombre dado en la configuracion de axes
+        if (Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -59,10 +60,20 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (playerRB.velocity.x < runningSpeed)
+        // accedo al gamemanager a su instancia compartida al metodo currente gamestate
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            playerRB.velocity = new Vector2(runningSpeed, playerRB.velocity.y);
+            if (playerRB.velocity.x < runningSpeed)
+            {
+                playerRB.velocity = new Vector2(runningSpeed, playerRB.velocity.y);
+            }
         }
+        else
+        {
+            // playerRB.velocity = new Vector2(0, playerRB.velocity.y);
+            playerRB.Sleep();
+        }
+
     }
 
     //* Realiza el salto

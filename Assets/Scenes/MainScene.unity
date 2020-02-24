@@ -258,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 6243068335792880900, guid: d8b28c9fba241a04fbab4d2c7fde856e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.65
+      value: -3.03
       objectReference: {fileID: 0}
     - target: {fileID: 6243068335792880900, guid: d8b28c9fba241a04fbab4d2c7fde856e,
         type: 3}
@@ -330,7 +330,7 @@ MonoBehaviour:
   groundmask:
     serializedVersion: 2
     m_Bits: 256
-  distance: 1.4364
+  distance: 1.438
 --- !u!50 &1419742665
 Rigidbody2D:
   serializedVersion: 4
