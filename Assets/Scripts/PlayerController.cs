@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     //* variables del movimiento del personaje
 
     public float jumpForce = 6f;
+    public float runningSpeed= 2f;
     Rigidbody2D playerRB;
     Animator animator;
 
@@ -43,11 +44,22 @@ public class PlayerController : MonoBehaviour
 
         //* Modificar el valor del boleando con lo que retorna la funcion IsThouchingTheGround
         animator.SetBool(STATE_ON_THE_GROUNG, IsTouchingTheGround());
+        //* Modificar el valor de acceleration del animator para avanzar en la animacion
         animator.SetFloat(STATE_ACCELERATION, playerRB.velocity.y);
-        Debug.Log(playerRB.velocity.y);
-
+      
         //* Creando un Gizmo
         Debug.DrawRay(this.transform.position, Vector2.down * distance, Color.green);
+    }
+
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void FixedUpdate()
+    {
+        if(playerRB.velocity.x < runningSpeed)
+        {
+            playerRB.velocity = new Vector2(runningSpeed, playerRB.velocity.y);
+        }
     }
 
     //* Realiza el salto

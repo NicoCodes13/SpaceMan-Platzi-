@@ -282,10 +282,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 6
+  runningSpeed: 2
   groundmask:
     serializedVersion: 2
     m_Bits: 256
-  distance: 1.4362
+  distance: 1.4364
 --- !u!50 &1419742665
 Rigidbody2D:
   serializedVersion: 4
@@ -334,6 +335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179111593162762790, guid: 29276204a9a350c41919026ad8a89915,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6179111593162762792, guid: 29276204a9a350c41919026ad8a89915,
         type: 3}
