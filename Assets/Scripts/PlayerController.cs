@@ -84,14 +84,10 @@ public class PlayerController : MonoBehaviour
             distance, //* distancia maxima
             groundmask)) //* contra la mascara del suelo
         {
-            //TODO: programar logica de contacto con el suelo
-            GameManager.sharedInstance.currentGameState = GameState.inGame;
             return true;
-
         }
         else
         {
-            //TODO: profrmar logica de noo contacto
             return false;
         }
     }

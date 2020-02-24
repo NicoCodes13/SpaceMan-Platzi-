@@ -9,13 +9,13 @@ public enum GameState
     inGame,
     gameOver
 }
-//*El manager debe saber en que estado esta el juego (usar IENUMERATE)
+//El manager debe saber en que estado esta el juego (usar IENUMERATE)
 public class GameManager : MonoBehaviour
 {
-    //* Inicializacion de una variable tipo GameStats ( enumerable)
+    // Inicializacion de una variable tipo GameStats ( enumerable)
     public GameState currentGameState = GameState.menu;
 
-    //* inicializacion del una variable para el Singleton
+    // inicializacion del una variable para el Singleton
     public static GameManager sharedInstance;
 
 
@@ -27,20 +27,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            StartGame();
+        }
+    }
+
 
     public void StartGame()
     {
-
+        SetGameState(GameState.inGame);
     }
 
     public void GameOver()
     {
-
+        SetGameState(GameState.gameOver);
     }
 
     public void BackToMenu()
     {
-
+        SetGameState(GameState.menu);
     }
 
     private void SetGameState(GameState newGameState)
