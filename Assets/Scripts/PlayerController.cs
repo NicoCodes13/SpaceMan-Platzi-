@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     const string STATE_ALIVE = "isAlive";
     const string STATE_ON_THE_GROUNG = "isOnTheGround";
+    const string STATE_ACCELERATION = "aceleration";
 
     public LayerMask groundmask;
 
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUNG, false);
+        animator.SetFloat(STATE_ACCELERATION, 0.0f);
+
     }
 
     // Update is called once per frame
@@ -40,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
         //* Modificar el valor del boleando con lo que retorna la funcion IsThouchingTheGround
         animator.SetBool(STATE_ON_THE_GROUNG, IsTouchingTheGround());
+        animator.SetFloat(STATE_ACCELERATION, playerRB.velocity.y);
+        Debug.Log(playerRB.velocity.y);
 
         //* Creando un Gizmo
         Debug.DrawRay(this.transform.position, Vector2.down * distance, Color.green);
