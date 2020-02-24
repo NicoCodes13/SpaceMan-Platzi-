@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
 
     public float jumpForce = 6f;
     Rigidbody2D playerRB;
+    Animator animator;
+
+    const string STATE_ALIVE = "isAlive";
+    const string STATE_ON_THE_GROUNG = "isOnTheGround";
 
     public LayerMask groundmask;
 
@@ -16,12 +20,14 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        animator.SetBool(STATE_ALIVE, true);
+        animator.SetBool(STATE_ON_THE_GROUNG, false);
     }
 
     // Update is called once per frame
@@ -32,9 +38,11 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        //* Modificar el valor del boleando con lo que retorna la funcion IsThouchingTheGround
+        animator.SetBool(STATE_ON_THE_GROUNG, IsTouchingTheGround());
 
         //* Creando un Gizmo
-        Debug.DrawRay(this.transform.position, Vector2.down * distance , Color.green);
+        Debug.DrawRay(this.transform.position, Vector2.down * distance, Color.green);
     }
 
     //* Realiza el salto
