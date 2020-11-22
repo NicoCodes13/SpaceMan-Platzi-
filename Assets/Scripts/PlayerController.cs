@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float runningSpeed = 2f;
     Rigidbody2D playerRB;
     Animator animator;
+    Vector3 startPosition;
 
     const string STATE_ALIVE = "isAlive";
     const string STATE_ON_THE_GROUNG = "isOnTheGround";
@@ -31,10 +32,26 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //posicion inicial del personaje 
+        startPosition = this.transform.position;
+
+    }
+
+    public void StartGame()
+    {
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUNG, false);
         animator.SetFloat(STATE_ACCELERATION, 0.0f);
 
+        //al generar un invoke se puede retasar un tiempo un llamado de una funcion
+        Invoke("RestartPosition", 0.1f);
+    }
+
+    void RestartPosition()
+    {
+        this.transform.position = startPosition;
+        //reiniciando las velocidades 
+        this.playerRB.velocity = Vector2.zero;
     }
 
     // Update is called once per frame
@@ -51,7 +68,8 @@ public class PlayerController : MonoBehaviour
         //* Modificar el valor de acceleration del animator para avanzar en la animacion
         animator.SetFloat(STATE_ACCELERATION, playerRB.velocity.y);
 
-        //* Creando un Gizmo
+
+        //! Creando un Gizmo para ver el raycast
         Debug.DrawRay(this.transform.position, Vector2.down * distance, Color.green);
     }
 
@@ -70,8 +88,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // playerRB.velocity = new Vector2(0, playerRB.velocity.y);
-            playerRB.Sleep();
+            playerRB.velocity = new Vector2(0, playerRB.velocity.y);
+            // playerRB.Sleep();
         }
 
     }
@@ -79,9 +97,12 @@ public class PlayerController : MonoBehaviour
     //* Realiza el salto
     void Jump()
     {
-        if (IsTouchingTheGround())
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
         {
-            playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (IsTouchingTheGround())
+            {
+                playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
 
     }
@@ -101,5 +122,11 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Die()
+    {
+        this.animator.SetBool(STATE_ALIVE, false);
+        GameManager.sharedInstance.GameOver();
     }
 }

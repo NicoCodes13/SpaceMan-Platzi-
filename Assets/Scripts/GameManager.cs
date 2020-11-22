@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     // inicializacion del una variable para el Singleton
     public static GameManager sharedInstance;
+    // private PlayerController controller;
 
 
     void Awake()
@@ -25,14 +26,21 @@ public class GameManager : MonoBehaviour
         {
             sharedInstance = this;
         }
+        Time.timeScale = 0f;
     }
 
-    private void Update() {
-        if(Input.GetButtonDown("Submit"))
+    private void Start()
+    {
+        // controller = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Submit") && currentGameState != GameState.inGame)
         {
             StartGame();
         }
-        if(Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
             BackToMenu();
         }
@@ -59,11 +67,17 @@ public class GameManager : MonoBehaviour
         if (newGameState == GameState.menu)
         {
             //TODO: Colocar la logica del menú
+            Time.timeScale = 0f;
         }
         else if (newGameState == GameState.inGame)
         {
 
             //TODO: preparar escena para jugar
+            Time.timeScale = 1f;
+            // llamada haciendo uso del singleton
+            PlayerController.sharedInstance.StartGame();
+            //Llamado con el gameobjet
+            // controller.StartGame();
         }
         else if (newGameState == GameState.gameOver)
         {
